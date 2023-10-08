@@ -14,4 +14,5 @@ public class MyDbContext : DbContext
 
     public DbSet<AUG30.Portfolio.Web.Models.ProfileModel> ProfileModel { get; set; } = default!;
     public DbSet<UserModel> UserModel { get; set; }
+    public DbSet<ServiceModel> ServiceModel { get; set; }
 }

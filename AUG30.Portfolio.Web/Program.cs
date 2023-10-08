@@ -23,8 +23,8 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("admin", policy => policy.RequireRole("admin"));
 
 
-    options.AddPolicy("viewer",
-        policy => policy.RequireRole("admin", "viewer")
+    options.AddPolicy("editor",
+        policy => policy.RequireRole("editor")
         );
 
     options.FallbackPolicy = new AuthorizationPolicyBuilder()

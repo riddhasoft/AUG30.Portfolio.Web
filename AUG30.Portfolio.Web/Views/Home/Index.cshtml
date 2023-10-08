@@ -1,7 +1,9 @@
-﻿@model ProfileModel
+﻿@model PortfolioViewModel
 @{
     ViewData["Title"] = "Home Page";
     Layout = "_Layout_Portfolio";
+    ProfileModel profileModel = Model.ProfileModel;
+    List<ServiceModel> serviceModels = Model.ServiceModels;
 }
 
 <!-- HERO -->
@@ -17,10 +19,10 @@
             <div class="d-flex flex-column justify-content-center align-items-center col-lg-7 col-md-7 col-12">
                 <div class="hero-text">
 
-                    <h1 class="hero-title">👋 @Model.Title</h1>
+                    <h1 class="hero-title">👋 @profileModel.Title</h1>
 
                     <a href="#" class="email-link">
-                        @Model.Email
+                        @profileModel.Email
                     </a>
 
                 </div>
@@ -40,16 +42,16 @@
 
                 <p>Ben Resume HTML Template is brought to you by <a rel="nofollow" href="https://www.tooplate.com" target="_parent">Tooplate website</a>. You can feel free to edit and use this page for your small site. You are allowed to use this HTML template for any kind of purpose.</p>
 
-                <p>@Model.Summary</p>
+                <p>@profileModel.Summary</p>
 
                 <ul class="mt-4 mb-5 mb-lg-0 profile-list list-unstyled">
-                    <li><strong>Full Name :</strong> @Model.FullName </li>
+                    <li><strong>Full Name :</strong> @profileModel.FullName </li>
 
-                    <li><strong>Date of Birth:</strong> @Model.DateOfBirth.ToString("dd MMMM, yyyy")</li>
+                    <li><strong>Date of Birth:</strong> @profileModel.DateOfBirth.ToString("dd MMMM, yyyy")</li>
 
-                    <li><strong>Website :</strong> @Model.WebSite</li>
+                    <li><strong>Website :</strong> @profileModel.WebSite</li>
 
-                    <li><strong>Email :</strong> @Model.Email</li>
+                    <li><strong>Email :</strong> @profileModel.Email</li>
                 </ul>
             </div>
 
@@ -59,18 +61,15 @@
 
         </div>
         <div class="row about-third">
-            <div class="col-lg-4 col-md-4 col-12">
-                <h3>Integer volutpat</h3>
-                <p>Sed eu risus tincidunt, finibus dolor non, gravida ex. Donec lacinia mi nec erat tempus, vel consectetur ante scelerisque. Ut blandit, risus in venenatis ultricies, lacus tellus fermentum.</p>
-            </div>
-            <div class="col-lg-4 col-md-4 col-12">
-                <h3>Mauris semper</h3>
-                <p>Cras et nisl vestibulum, accumsan elit sed, pretium enim. Vestibulum in condimentum magna. Maecenas quam magna, iaculis eu turpis et, commodo pulvinar leo.</p>
-            </div>
-            <div class="col-lg-4 col-md-4 col-12">
-                <h3>Integer id neque</h3>
-                <p>Duis at mollis leo, venenatis congue ex. Cras urna dui, gravida euismod lectus et, cursus tempor nulla. Praesent at turpis quis ex tristique gravida quis eget eros.</p>
-            </div>
+            @foreach (var service in serviceModels)
+            {
+                <div class="col-lg-4 col-md-4 col-12">
+                    <h3>@service.Title</h3>
+                    <p>@service.Description</p>
+                </div>
+            }
+
+
         </div>
     </div>
 </section>

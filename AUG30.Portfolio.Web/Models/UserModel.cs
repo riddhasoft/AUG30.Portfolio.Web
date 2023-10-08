@@ -10,6 +10,7 @@ namespace AUG30.Portfolio.Web.Models
         public string Email { get; set; }
         [DataType(DataType.Password)]
         public string Password { get; set; }
+        public string? Roles { get; set; }
 
     }
     public class SignupModel : UserModel

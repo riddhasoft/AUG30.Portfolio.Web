@@ -20,7 +20,14 @@ namespace AUG30.Portfolio.Web.Controllers
         public IActionResult Index()
         {
             ProfileModel model = _context.ProfileModel.FirstOrDefault();
-            return View(model);
+            List<ServiceModel> services = _context.ServiceModel.ToList();
+            PortfolioViewModel viewModel = new PortfolioViewModel()
+            {
+                ProfileModel = model,
+                ServiceModels = services
+            };
+
+            return View(viewModel);
         }
 
         public IActionResult Privacy()
@@ -48,7 +55,7 @@ namespace AUG30.Portfolio.Web.Controllers
                                     .Where(x => x.Email == model.Username && x.Password == model.Password).FirstOrDefault();
                 if (user != null)
                 {
-                    addingClaimIdentity(model);
+                    addingClaimIdentity(model, user.Roles);
 
                     return Redirect("/admin");
                 }
@@ -91,7 +98,7 @@ namespace AUG30.Portfolio.Web.Controllers
             }
             return View();
         }
-        private void addingClaimIdentity(LoginModel user)
+        private void addingClaimIdentity(LoginModel user, string roles)
         {
             //list of claims
             var userClaims = new List<Claim>()
@@ -99,8 +106,8 @@ namespace AUG30.Portfolio.Web.Controllers
                     new Claim("UserName", user.Username),
                     new Claim(ClaimTypes.Email,user.Username),
 
-                    new Claim(ClaimTypes.Role,"user"),
-                    new Claim(ClaimTypes.Role,"admin")
+                   // new Claim(ClaimTypes.Role,"user"),
+                    new Claim(ClaimTypes.Role,roles)
                  };
 
             //create a identity claims
