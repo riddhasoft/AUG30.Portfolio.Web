@@ -8,7 +8,7 @@ builder.Services.AddDbContext<MyDbContext>(options =>
 
 // Add services to the container.
 
-
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 #region Authentication & authorization
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(config =>

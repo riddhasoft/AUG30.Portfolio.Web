@@ -55,7 +55,7 @@ namespace AUG30.Portfolio.Web.Controllers
                                     .Where(x => x.Email == model.Username && x.Password == model.Password).FirstOrDefault();
                 if (user != null)
                 {
-                    addingClaimIdentity(model, user.Roles);
+                    addingClaimIdentity(model, user.Roles,user.FullName);
 
                     return Redirect("/admin");
                 }
@@ -98,14 +98,15 @@ namespace AUG30.Portfolio.Web.Controllers
             }
             return View();
         }
-        private void addingClaimIdentity(LoginModel user, string roles)
+        private void addingClaimIdentity(LoginModel user, string roles,string fullname)
         {
             //list of claims
             var userClaims = new List<Claim>()
                 {
                     new Claim("UserName", user.Username),
                     new Claim(ClaimTypes.Email,user.Username),
-
+                    new Claim(ClaimTypes.Name,fullname),
+                    new Claim("Mobile","9841235678"),
                    // new Claim(ClaimTypes.Role,"user"),
                     new Claim(ClaimTypes.Role,roles)
                  };

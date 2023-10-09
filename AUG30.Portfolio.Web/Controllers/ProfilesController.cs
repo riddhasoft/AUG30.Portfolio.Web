@@ -6,9 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AUG30.Portfolio.Web.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AUG30.Portfolio.Web.Controllers
+
 {
+    [Authorize(Roles = "admin")]
     public class ProfilesController : Controller
     {
         private readonly MyDbContext _context;
