@@ -26,7 +26,7 @@ namespace AUG30.Portfolio.Web.Controllers
                 ProfileModel = model,
                 ServiceModels = services
             };
-
+            throw new Exception("this is the exception raised on action of the controller");
             return View(viewModel);
         }
 

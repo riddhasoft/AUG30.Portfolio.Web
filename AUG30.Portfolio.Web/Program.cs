@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Authentication.Cookies;
+﻿using AUG30.Portfolio.Web.Filters;
+using MessagePack.Resolvers;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,6 +32,14 @@ builder.Services.AddAuthorization(options =>
     options.FallbackPolicy = new AuthorizationPolicyBuilder()
        .RequireAuthenticatedUser()
        .Build();
+});
+//gloablly registering filter
+builder.Services.AddMvc((option) =>
+{
+    option.Filters.Add(typeof(MyActionFilter));
+    option.Filters.Add(typeof(MyResultFilter));
+    option.Filters.Add(typeof(MyExceptionFilter));
+
 });
 #endregion
 builder.Services.AddControllersWithViews();
