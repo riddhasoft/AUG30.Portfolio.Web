@@ -1,4 +1,5 @@
-﻿using AUG30.Portfolio.Web.Filters;
+﻿using AUG30.Portfolio.Web;
+using AUG30.Portfolio.Web.Filters;
 using MessagePack.Resolvers;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
@@ -11,6 +12,12 @@ builder.Services.AddDbContext<MyDbContext>(options =>
 // Add services to the container.
 
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+//adding dependancy in service
+builder.Services.AddTransient<IServicesService, ServicesService>();
+builder.Services.AddTransient<IProfileService, ProfileService>();
+builder.Services.AddTransient<IUserService, UserService>();
+
+
 #region Authentication & authorization
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(config =>
@@ -36,9 +43,10 @@ builder.Services.AddAuthorization(options =>
 //gloablly registering filter
 builder.Services.AddMvc((option) =>
 {
-    option.Filters.Add(typeof(MyActionFilter));
-    option.Filters.Add(typeof(MyResultFilter));
-    option.Filters.Add(typeof(MyExceptionFilter));
+    // option.Filters.Add(typeof(MVCAuthorizationFilter));
+    //option.Filters.Add(typeof(MyActionFilter));
+    //option.Filters.Add(typeof(MyResultFilter));
+    //option.Filters.Add(typeof(MyExceptionFilter));
 
 });
 #endregion

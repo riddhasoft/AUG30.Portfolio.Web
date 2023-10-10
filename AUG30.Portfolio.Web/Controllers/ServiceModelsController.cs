@@ -1,43 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+
 using Microsoft.EntityFrameworkCore;
 using AUG30.Portfolio.Web.Models;
 using Microsoft.AspNetCore.Authorization;
+using AUG30.Portfolio.Web.Sevices;
 
 namespace AUG30.Portfolio.Web.Controllers
 {
     [Authorize(Roles = "editor")]
     public class ServiceModelsController : Controller
     {
-        private readonly MyDbContext _context;
+        private readonly IServicesService _service;
 
-        public ServiceModelsController(MyDbContext context)
+        public ServiceModelsController(IServicesService service)
         {
-            _context = context;
+            
+            _service = service;
         }
 
         // GET: ServiceModels
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return _context.ServiceModel != null ?
-                        View(await _context.ServiceModel.ToListAsync()) :
-                        Problem("Entity set 'MyDbContext.ServiceModel'  is null.");
+            return View(_service.Get());
         }
 
         // GET: ServiceModels/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.ServiceModel == null)
-            {
-                return NotFound();
-            }
 
-            var serviceModel = await _context.ServiceModel
-                .FirstOrDefaultAsync(m => m.Id == id);
+
+            var serviceModel = _service.Detail(id ?? 0);
             if (serviceModel == null)
             {
                 return NotFound();
@@ -61,8 +54,7 @@ namespace AUG30.Portfolio.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(serviceModel);
-                await _context.SaveChangesAsync();
+                _service.Save(serviceModel);
                 return RedirectToAction(nameof(Index));
             }
             return View(serviceModel);
@@ -71,12 +63,9 @@ namespace AUG30.Portfolio.Web.Controllers
         // GET: ServiceModels/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.ServiceModel == null)
-            {
-                return NotFound();
-            }
 
-            var serviceModel = await _context.ServiceModel.FindAsync(id);
+
+            var serviceModel = _service.Detail(id ?? 0);
             if (serviceModel == null)
             {
                 return NotFound();
@@ -100,8 +89,8 @@ namespace AUG30.Portfolio.Web.Controllers
             {
                 try
                 {
-                    _context.Update(serviceModel);
-                    await _context.SaveChangesAsync();
+                    _service.Update(serviceModel);
+
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -122,13 +111,9 @@ namespace AUG30.Portfolio.Web.Controllers
         // GET: ServiceModels/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.ServiceModel == null)
-            {
-                return NotFound();
-            }
 
-            var serviceModel = await _context.ServiceModel
-                .FirstOrDefaultAsync(m => m.Id == id);
+
+            var serviceModel = _service.Detail(id ?? 0);
             if (serviceModel == null)
             {
                 return NotFound();
@@ -142,23 +127,20 @@ namespace AUG30.Portfolio.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.ServiceModel == null)
-            {
-                return Problem("Entity set 'MyDbContext.ServiceModel'  is null.");
-            }
-            var serviceModel = await _context.ServiceModel.FindAsync(id);
+
+            var serviceModel = _service.Detail(id);
             if (serviceModel != null)
             {
-                _context.ServiceModel.Remove(serviceModel);
+                _service.Delete(id);
             }
 
-            await _context.SaveChangesAsync();
+
             return RedirectToAction(nameof(Index));
         }
 
         private bool ServiceModelExists(int id)
         {
-            return (_context.ServiceModel?.Any(e => e.Id == id)).GetValueOrDefault();
+            return _service.Detail(id) != null;
         }
     }
 }

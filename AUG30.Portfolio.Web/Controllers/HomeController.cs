@@ -10,23 +10,27 @@ namespace AUG30.Portfolio.Web.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IServicesService _serviceService;
+        private readonly IProfileService _profileService;
+        private readonly IUserService _userService;
 
-        private readonly MyDbContext _context;
-        public HomeController(MyDbContext context)
+        public HomeController(IServicesService servicesService, IProfileService profileService, IUserService userService)
         {
-            _context = context;
+            _serviceService = servicesService;
+            _profileService = profileService;
+            _userService = userService;
         }
         [AllowAnonymous]
         public IActionResult Index()
         {
-            ProfileModel model = _context.ProfileModel.FirstOrDefault();
-            List<ServiceModel> services = _context.ServiceModel.ToList();
+            ProfileModel model = _profileService.Get().FirstOrDefault();
+            List<ServiceModel> services = _serviceService.Get();
             PortfolioViewModel viewModel = new PortfolioViewModel()
             {
                 ProfileModel = model,
                 ServiceModels = services
             };
-            throw new Exception("this is the exception raised on action of the controller");
+            // throw new Exception("this is the exception raised on action of the controller");
             return View(viewModel);
         }
 
@@ -51,11 +55,11 @@ namespace AUG30.Portfolio.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                UserModel user = _context.UserModel
+                UserModel user = _userService.Get()
                                     .Where(x => x.Email == model.Username && x.Password == model.Password).FirstOrDefault();
                 if (user != null)
                 {
-                    addingClaimIdentity(model, user.Roles,user.FullName);
+                    addingClaimIdentity(model, user.Roles, user.FullName);
 
                     return Redirect("/admin");
                 }
@@ -92,13 +96,13 @@ namespace AUG30.Portfolio.Web.Controllers
                     Id = model.Id
 
                 };
-                _context.UserModel.Add(model);
-                _context.SaveChanges();
+                _userService.Save(model);
+
                 return RedirectToAction("Login");
             }
             return View();
         }
-        private void addingClaimIdentity(LoginModel user, string roles,string fullname)
+        private void addingClaimIdentity(LoginModel user, string roles, string fullname)
         {
             //list of claims
             var userClaims = new List<Claim>()
