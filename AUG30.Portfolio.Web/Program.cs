@@ -1,5 +1,5 @@
-﻿using AUG30.Portfolio.Web;
-using AUG30.Portfolio.Web.Filters;
+﻿using AUG30.Portfolio.Web.Filters;
+using AUG30.Portfolio.Web.Sevices;
 using MessagePack.Resolvers;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
@@ -45,7 +45,7 @@ builder.Services.AddMvc((option) =>
 {
     // option.Filters.Add(typeof(MVCAuthorizationFilter));
     //option.Filters.Add(typeof(MyActionFilter));
-    //option.Filters.Add(typeof(MyResultFilter));
+    option.Filters.Add(typeof(MyResultFilter));
     //option.Filters.Add(typeof(MyExceptionFilter));
 
 });

@@ -7,6 +7,7 @@ namespace AUG30.Portfolio.Web.Filters
         public void OnActionExecuted(ActionExecutedContext context)
         {
             //
+           // context.HttpContext.Request.Host;
         }
 
         public void OnActionExecuting(ActionExecutingContext context)

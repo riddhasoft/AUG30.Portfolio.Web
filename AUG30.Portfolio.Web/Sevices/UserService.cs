@@ -1,6 +1,6 @@
 ﻿using AUG30.Portfolio.Web.Models;
 
-namespace AUG30.Portfolio.Web
+namespace AUG30.Portfolio.Web.Sevices
 {
     public class UserService : IUserService
     {
