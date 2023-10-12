@@ -10,5 +10,6 @@ namespace AUG30.Portfolio.Web.Sevices
         bool Delete(int id);
         ServiceModel Detail(int id);
 
+
     }
 }
