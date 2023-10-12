@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace AUG30.Portfolio.Web.Models
+namespace AUG30.Portfolio.Model
 {
     public class ProfileModel
     {

@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AUG30.Portfolio.Data\AUG30.Portfolio.Data.csproj" />
+    <ProjectReference Include="..\AUG30.Portfolio.Model\AUG30.Portfolio.Model.csproj" />
+  </ItemGroup>
+
+</Project>

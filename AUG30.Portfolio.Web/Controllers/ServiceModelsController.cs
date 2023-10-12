@@ -2,9 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 
 using Microsoft.EntityFrameworkCore;
-using AUG30.Portfolio.Web.Models;
+using AUG30.Portfolio.Model;
 using Microsoft.AspNetCore.Authorization;
-using AUG30.Portfolio.Web.Sevices;
+using AUG30.Portfolio.Service;
 
 namespace AUG30.Portfolio.Web.Controllers
 {

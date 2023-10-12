@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using AUG30.Portfolio.Web.Models;
+using AUG30.Portfolio.Model;
 using Microsoft.AspNetCore.Authorization;
 
 namespace AUG30.Portfolio.Web.Controllers

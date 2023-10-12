@@ -1,11 +1,11 @@
-﻿using AUG30.Portfolio.Web.Models;
+﻿using AUG30.Portfolio.Model;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Security.Claims;
-using AUG30.Portfolio.Web.Sevices;
+using AUG30.Portfolio.Service;
 
 namespace AUG30.Portfolio.Web.Controllers
 {

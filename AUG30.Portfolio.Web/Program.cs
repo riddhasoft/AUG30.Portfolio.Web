@@ -1,5 +1,5 @@
 ﻿using AUG30.Portfolio.Web.Filters;
-using AUG30.Portfolio.Web.Sevices;
+using AUG30.Portfolio.Service;
 using MessagePack.Resolvers;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;

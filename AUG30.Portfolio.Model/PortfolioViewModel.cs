@@ -1,4 +1,4 @@
-﻿namespace AUG30.Portfolio.Web.Models
+﻿namespace AUG30.Portfolio.Model
 {
     public class PortfolioViewModel
     {

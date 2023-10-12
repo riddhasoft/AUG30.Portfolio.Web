@@ -1,6 +1,6 @@
-﻿using AUG30.Portfolio.Web.Models;
+﻿using AUG30.Portfolio.Model;
 
-namespace AUG30.Portfolio.Web.Sevices
+namespace AUG30.Portfolio.Service
 {
     public class ProfileService : IProfileService
     {
