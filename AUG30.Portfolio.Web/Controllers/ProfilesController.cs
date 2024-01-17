@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace AUG30.Portfolio.Web.Controllers
 
 {
-    [Authorize(Roles = "admin")]
+    [Authorize(Roles = "Profiles")]
     public class ProfilesController : Controller
     {
         private readonly MyDbContext _context;

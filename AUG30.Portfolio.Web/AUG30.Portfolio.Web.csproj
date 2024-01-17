@@ -8,12 +8,13 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\admin\" />
+    <Folder Include="wwwroot\uploads\" />
     <Folder Include="wwwroot\web\" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.21" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.21">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.23" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.23">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>

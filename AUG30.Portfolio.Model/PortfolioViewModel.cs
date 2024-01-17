@@ -4,5 +4,6 @@
     {
         public ProfileModel? ProfileModel { get; set; }
         public List<ServiceModel> ServiceModels { get; set; }
+        public List<CLientModel> Clients { get; set; }
     }
 }

@@ -16,6 +16,7 @@ builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddTransient<IServicesService, ServicesService>();
 builder.Services.AddTransient<IProfileService, ProfileService>();
 builder.Services.AddTransient<IUserService, UserService>();
+builder.Services.AddTransient<IHomeService, HomeService>();
 
 
 #region Authentication & authorization
@@ -32,10 +33,7 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("admin", policy => policy.RequireRole("admin"));
 
 
-    options.AddPolicy("editor",
-        policy => policy.RequireRole("editor")
-        );
-
+   
     options.FallbackPolicy = new AuthorizationPolicyBuilder()
        .RequireAuthenticatedUser()
        .Build();

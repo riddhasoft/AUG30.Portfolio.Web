@@ -1,10 +1,17 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
+
+
+@using System.Security.Claims;
+@inject IHttpContextAccessor accessor
 @{
+    bool isProfileVisible = true;
+    var roles = accessor.HttpContext.User.FindAll(ClaimTypes.Role);
+
 }
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
+   
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
         <div class="sidebar-brand-icon rotate-n-15">
@@ -112,18 +119,19 @@
         </a>
     </li>
     <!-- Nav Item - Tables -->
-    <li class="nav-item">
-        <a class="nav-link" asp-controller="Profiles" asp-action="index">
-            <i class="fas fa-fw fa-table"></i>
-            <span>Profile</span>
-        </a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" asp-controller="ServiceModels" asp-action="index">
-            <i class="fas fa-fw fa-table"></i>
-            <span>Services</span>
-        </a>
-    </li>
+   
+    @foreach (var role in roles)
+    {
+        <li class="nav-item">
+            <a class="nav-link" asp-controller="@role.Value" asp-action="index">
+                <i class="fas fa-fw fa-table"></i>
+                <span>@role.Value</span>
+            </a>
+        </li>
+    }
+
+    
+   
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
 

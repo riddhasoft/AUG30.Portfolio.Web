@@ -8,7 +8,7 @@ using AUG30.Portfolio.Service;
 
 namespace AUG30.Portfolio.Web.Controllers
 {
-    [Authorize(Roles = "editor")]
+    [Authorize(Roles = "ServiceModels")]
     public class ServiceModelsController : Controller
     {
         private readonly IServicesService _service;

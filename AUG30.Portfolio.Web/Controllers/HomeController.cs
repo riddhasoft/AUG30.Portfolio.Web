@@ -14,22 +14,28 @@ namespace AUG30.Portfolio.Web.Controllers
         private readonly IServicesService _serviceService;
         private readonly IProfileService _profileService;
         private readonly IUserService _userService;
+        private readonly IHomeService _homeService;
 
-        public HomeController(IServicesService servicesService, IProfileService profileService, IUserService userService)
+        public HomeController(IServicesService servicesService, IProfileService profileService, IUserService userService, IHomeService homeService)
         {
             _serviceService = servicesService;
             _profileService = profileService;
             _userService = userService;
+            _homeService = homeService;
         }
         [AllowAnonymous]
         public IActionResult Index()
         {
+            ViewBag.MyVariable = "hi this is message from viewBag";
             ProfileModel model = _profileService.Get().FirstOrDefault();
             List<ServiceModel> services = _serviceService.Get();
+            List<CLientModel> clients = _homeService.GetCLients();
+
             PortfolioViewModel viewModel = new PortfolioViewModel()
             {
                 ProfileModel = model,
-                ServiceModels = services
+                ServiceModels = services,
+                Clients = clients,
             };
             // throw new Exception("this is the exception raised on action of the controller");
             return View(viewModel);
@@ -112,9 +118,14 @@ namespace AUG30.Portfolio.Web.Controllers
                     new Claim(ClaimTypes.Email,user.Username),
                     new Claim(ClaimTypes.Name,fullname),
                     new Claim("Mobile","9841235678"),
-                   // new Claim(ClaimTypes.Role,"user"),
-                    new Claim(ClaimTypes.Role,roles)
+                    //new Claim(ClaimTypes.Role,"editor"),
+                    
                  };
+
+            foreach (var role in roles.Split(','))
+            {
+                userClaims.Add(new Claim(ClaimTypes.Role, role));
+            }
 
             //create a identity claims
             var claimsIdentity = new ClaimsIdentity(

@@ -39,6 +39,7 @@
 
             <div class="col-lg-6 col-md-6 col-12">
                 <h3 class="mb-4">This is Ben's Resume</h3>
+                @ViewBag.MyVariable
 
                 <p>Ben Resume HTML Template is brought to you by <a rel="nofollow" href="https://www.tooplate.com" target="_parent">Tooplate website</a>. You can feel free to edit and use this page for your small site. You are allowed to use this HTML template for any kind of purpose.</p>
 
@@ -84,65 +85,28 @@
                 <h3 class="mb-5 text-center">What People say</h3>
 
                 <div class="owl-carousel owl-theme" id="testimonials-carousel">
-                    <div class="item">
-                        <div class="testimonials-thumb d-flex">
-                            <div class="testimonials-image">
-                                <img src="/web/images/testimonials/testimonial-image01.jpg" class="img-fluid" alt="testimonials image">
-                            </div>
+                    @foreach (var client in Model.Clients)
+                    {
+                        string imageSrc = client.PhotoUrl ?? "/web/images/testimonials/testimonial-image01.jpg";
 
-                            <div class="testimonials-info">
-                                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem.</p>
+                        <div class="item">
+                            <div class="testimonials-thumb d-flex">
+                                <div class="testimonials-image">
+                                    <img width="200" src="@imageSrc" class="img-fluid" alt="testimonials image">
+                                </div>
 
-                                <h6 class="mb-0">Ben</h6>
-                                <span>Art Director</span>
-                            </div>
-                        </div>
-                    </div>
+                                <div class="testimonials-info">
+                                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem.</p>
 
-                    <div class="item">
-                        <div class="testimonials-thumb d-flex">
-                            <div class="testimonials-image">
-                                <img src="/web/images/testimonials/testimonial-image02.jpg" class="img-fluid" alt="testimonials image">
-                            </div>
-
-                            <div class="testimonials-info">
-                                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem.</p>
-
-                                <h6 class="mb-0">Marie</h6>
-                                <span>Marketing Consultant</span>
+                                    <h6 class="mb-0">@client.FullName</h6>
+                                    <span>@client.Designation</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="item">
-                        <div class="testimonials-thumb d-flex">
-                            <div class="testimonials-image">
-                                <img src="/web/images/testimonials/testimonial-image03.jpg" class="img-fluid" alt="testimonials image">
-                            </div>
 
-                            <div class="testimonials-info">
-                                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem.</p>
+                    }
 
-                                <h6 class="mb-0">Jen</h6>
-                                <span>Product Manager</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="item">
-                        <div class="testimonials-thumb d-flex">
-                            <div class="testimonials-image">
-                                <img src="/web/images/testimonials/testimonial-image04.jpg" class="img-fluid" alt="testimonials image">
-                            </div>
-
-                            <div class="testimonials-info">
-                                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem.</p>
-
-                                <h6 class="mb-0">Wilson</h6>
-                                <span>Web Developer</span>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
             </div>
